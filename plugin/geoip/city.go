@@ -55,4 +55,10 @@ func (g GeoIP) setCityMetadata(ctx context.Context, data *geoip2.City) {
 	metadata.SetValueFunc(ctx, pluginName+"/postalcode", func() string {
 		return postalCode
 	})
+    if len(data.Subdivisions) > 0 {
+        subdivision := data.Subdivisions[0]
+        metadata.SetValueFunc(ctx, pluginName+"/subdivision", func() string {
+            return subdivision
+        })
+    }
 }
